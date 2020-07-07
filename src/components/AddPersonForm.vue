@@ -11,9 +11,9 @@
       <input type="date" v-model="birthDate" placeholder="Dirth Date" />
     </div>
     <div class="form-group">
-      <input type="radio" id="sex-male" value="male" v-model="sex" />
+      <input type="radio" id="sex-male" value="Male" v-model="sex" />
       <label for="sex-male">Male</label>
-      <input type="radio" id="sex-female" value="female" v-model="sex" />
+      <input type="radio" id="sex-female" value="Female" v-model="sex" />
       <label for="sex-female">Female</label>
     </div>
     <div class="form-group">
@@ -33,7 +33,6 @@ import { Component, Prop, Vue } from "vue-property-decorator";
 
 @Component
 export default class AddPersonForm extends Vue {
-  @Prop() private msg!: string;
   data() {
     return {
       name: "",
