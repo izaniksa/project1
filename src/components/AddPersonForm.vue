@@ -7,7 +7,24 @@
     <div class="form-group">
       <input v-model="surname" placeholder="Surname" />
     </div>
-    <button v-on:click="$emit('form-save', { name, surname })">Add</button>
+    <div class="form-group">
+      <input type="date" v-model="birthDate" placeholder="Dirth Date" />
+    </div>
+    <div class="form-group">
+      <input type="radio" id="sex-male" value="male" v-model="sex" />
+      <label for="sex-male">Male</label>
+      <input type="radio" id="sex-female" value="female" v-model="sex" />
+      <label for="sex-female">Female</label>
+    </div>
+    <div class="form-group">
+      <select v-model="hobbies" multiple>
+        <option>Books</option>
+        <option>Swimming</option>
+        <option>Music</option>
+        <option>Cats</option>
+      </select>
+    </div>
+    <button v-on:click="$emit('form-save', { name, surname, birthDate, sex, hobbies })">Add</button>
   </div>
 </template>
 
@@ -20,7 +37,10 @@ export default class AddPersonForm extends Vue {
   data() {
     return {
       name: "",
-      surname: ""
+      surname: "",
+      birthDate: "",
+      sex: "",
+      hobbies: []
     };
   }
 }
