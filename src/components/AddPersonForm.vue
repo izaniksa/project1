@@ -25,19 +25,19 @@
       </select>
     </div>
     <button v-on:click="save({ name, surname, birthDate, sex, hobbies })">Add</button>
-      <p v-if="errors.length">
-    <b>Please correct the following error(s):</b>
-    <ul>
-      <li v-for="error in errors" :key="error">{{ error }}</li>
-    </ul>
-  </p>
+    <Errors v-bind:errors="errors" />
   </div>
 </template>
 
 <script lang="ts">
 import { Component, Prop, Vue } from "vue-property-decorator";
+import Errors from "@/components/Errors.vue";
 
-@Component
+@Component({
+  components: {
+    Errors
+  }
+})
 export default class AddPersonForm extends Vue {
   data() {
     return {
@@ -52,27 +52,26 @@ export default class AddPersonForm extends Vue {
   save(data: any) {
     this.$data.errors = [];
     if (!this.$data.name.length) {
-      this.$data.errors.push('Name must be set');
+      this.$data.errors.push("Name must be set");
     }
     if (!this.$data.surname.length) {
-      this.$data.errors.push('Surname must be set');
+      this.$data.errors.push("Surname must be set");
     }
     if (!this.$data.hobbies.length) {
-      this.$data.errors.push('At leest one hobby is required');
+      this.$data.errors.push("At leest one hobby is required");
     }
     if (!this.$data.birthDate.length) {
-      this.$data.errors.push('Birth date must be set');
+      this.$data.errors.push("Birth date must be set");
     } else {
       const dateNow = Date.now();
       const birthDate = Date.parse(this.$data.birthDate);
       if (birthDate > dateNow) {
-        this.$data.errors.push('Birth date must be not be from future');
+        this.$data.errors.push("Birth date must be not be from future");
       }
     }
     if (!this.$data.errors.length) {
       this.$emit("form-save", data);
     }
-    
   }
 }
 </script>
