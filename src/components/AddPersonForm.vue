@@ -24,7 +24,13 @@
         <option>Cats</option>
       </select>
     </div>
-    <button v-on:click="$emit('form-save', { name, surname, birthDate, sex, hobbies })">Add</button>
+    <button v-on:click="save({ name, surname, birthDate, sex, hobbies })">Add</button>
+      <p v-if="errors.length">
+    <b>Please correct the following error(s):</b>
+    <ul>
+      <li v-for="error in errors" :key="error">{{ error }}</li>
+    </ul>
+  </p>
   </div>
 </template>
 
@@ -39,8 +45,34 @@ export default class AddPersonForm extends Vue {
       surname: "",
       birthDate: "",
       sex: "",
-      hobbies: []
+      hobbies: [],
+      errors: []
     };
+  }
+  save(data: any) {
+    this.$data.errors = [];
+    if (!this.$data.name.length) {
+      this.$data.errors.push('Name must be set');
+    }
+    if (!this.$data.surname.length) {
+      this.$data.errors.push('Surname must be set');
+    }
+    if (!this.$data.hobbies.length) {
+      this.$data.errors.push('At leest one hobby is required');
+    }
+    if (!this.$data.birthDate.length) {
+      this.$data.errors.push('Birth date must be set');
+    } else {
+      const dateNow = Date.now();
+      const birthDate = Date.parse(this.$data.birthDate);
+      if (birthDate > dateNow) {
+        this.$data.errors.push('Birth date must be not be from future');
+      }
+    }
+    if (!this.$data.errors.length) {
+      this.$emit("form-save", data);
+    }
+    
   }
 }
 </script>
