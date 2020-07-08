@@ -2,7 +2,7 @@
   <div class="add-person">
     <h1>This is an add person page</h1>
     <AddPersonForm v-on:form-save="onFormSave" />
-    <UsersList v-bind:users="users" />
+    <!-- <UsersList v-bind:users="users" /> -->
   </div>
 </template>
 
@@ -23,7 +23,7 @@ import { Component, Prop, Vue } from "vue-property-decorator";
   },
   methods: {
     onFormSave(form) {
-      this.$data.users.push(form);
+      (this as any).$users.push(form);
       console.log(form);
     }
   }

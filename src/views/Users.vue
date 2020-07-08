@@ -1,18 +1,18 @@
 <template>
-  <div class="home">
+  <div class="users">
     <img alt="Vue logo" src="../assets/logo.png" />
-    <AddPersonForm msg="Welcome to Your Vue.js App" />
+    <UsersList v-bind:users="$users" />
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
-import AddPersonForm from "@/components/AddPersonForm.vue";
+import UsersList from "@/components/UsersList.vue";
 
 export default {
-  name: "Home",
+  name: "Users",
   components: {
-    AddPersonForm
+    UsersList
   }
 };
 </script>
